@@ -1,21 +1,22 @@
 #NoTrayIcon
 #RequireAdmin
-#Region ;**** Directives created by AutoIt3Wrapper_GUI ****
+#region ;**** Directives created by AutoIt3Wrapper_GUI ****
+#AutoIt3Wrapper_Version=Beta
 #AutoIt3Wrapper_Icon=Win7Installer.ico
 #AutoIt3Wrapper_Outfile=Win7Installer.exe
 #AutoIt3Wrapper_Compression=4
 #AutoIt3Wrapper_UseUpx=n
 #AutoIt3Wrapper_Res_Comment=Windows 7 fast installer
 #AutoIt3Wrapper_Res_Description=Windows 7 fast installer
-#AutoIt3Wrapper_Res_Fileversion=1.0.0.5
+#AutoIt3Wrapper_Res_Fileversion=1.0.0.7
 #AutoIt3Wrapper_Res_LegalCopyright=© 2011 Sadeghi85
 #AutoIt3Wrapper_Res_Language=1033
-#AutoIt3Wrapper_res_requestedExecutionLevel=requireAdministrator
+#AutoIt3Wrapper_Res_requestedExecutionLevel=requireAdministrator
 #AutoIt3Wrapper_Res_Field=ProductName|Win7Installer.exe
-#AutoIt3Wrapper_Res_Field=ProductVersion|1.0.0.5
-#AutoIt3Wrapper_Au3Check_Stop_OnWarning=y
+#AutoIt3Wrapper_Res_Field=ProductVersion|1.0.0.7
+#AutoIt3Wrapper_AU3Check_Stop_OnWarning=y
 #AutoIt3Wrapper_Run_Tidy=y
-#EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
+#endregion ;**** Directives created by AutoIt3Wrapper_GUI ****
 #NoAutoIt3Execute
 #include <Constants.au3>
 #include <ButtonConstants.au3>
@@ -145,8 +146,8 @@ EndIf
 AdlibRegister("_ChangeProgress", "5000")
 
 Opt("GUIOnEventMode", 1)
-#Region ### START Koda GUI section ### Form=c:\users\admin\desktop\Win7Installer.kxf
-Global $frmMain = GUICreate("Windows 7 fast installer", 365, 229, -1, -1)
+#region ### START Koda GUI section ### Form=C:\Users\Admin\Desktop\Win7Installer\Win7Installer.kxf
+Global $frmMain = GUICreate("Windows 7 fast installer", 375, 229, -1, -1)
 Global $mnuFile = GUICtrlCreateMenu("&File")
 Global $mnuExit = GUICtrlCreateMenuItem("&Exit", $mnuFile)
 GUICtrlSetOnEvent(-1, "mnuExitClick")
@@ -154,13 +155,13 @@ Global $MenuItem2 = GUICtrlCreateMenu("&Help")
 Global $mnuAbout = GUICtrlCreateMenuItem("&About", $MenuItem2)
 GUICtrlSetOnEvent(-1, "mnuAboutClick")
 GUISetOnEvent($GUI_EVENT_CLOSE, "frmMainClose")
-Global $Group1 = GUICtrlCreateGroup("", 4, 0, 356, 90)
+Global $Group1 = GUICtrlCreateGroup("", 4, 0, 366, 90)
 Global $Label5 = GUICtrlCreateLabel("Source:", 20, 20, 41, 17, 0)
 GUICtrlSetTip(-1, "Path to installation WIM file")
-Global $txtPathToSource = GUICtrlCreateInput("", 62, 18, 218, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_READONLY))
+Global $txtPathToSource = GUICtrlCreateInput("", 62, 18, 226, 21, BitOR($GUI_SS_DEFAULT_INPUT, $ES_READONLY))
 GUICtrlSetTip(-1, "Path to installation WIM file")
 GUICtrlSetCursor(-1, 0)
-Global $btnBrowse = GUICtrlCreateButton("Browse ...", 283, 16, 65, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
+Global $btnBrowse = GUICtrlCreateButton("Browse ...", 293, 16, 65, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
 GUICtrlSetOnEvent(-1, "btnBrowseClick")
 Global $Group2 = GUICtrlCreateGroup("", 16, 42, 95, 41)
 Global $Label1 = GUICtrlCreateLabel("Boot drive:", 22, 58, 55, 17, 0)
@@ -180,25 +181,36 @@ GUICtrlSetOnEvent(-1, "txtInstallationDriveChange")
 GUICtrlSetTip(-1, "Drive letter")
 GUICtrlSetCursor(-1, 0)
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-Global $cmbEdition = GUICtrlCreateCombo("", 252, 54, 95, 25, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
+Global $cmbEdition = GUICtrlCreateCombo("", 252, 54, 35, 28, BitOR($CBS_DROPDOWNLIST, $CBS_AUTOHSCROLL))
 GUICtrlSetState(-1, $GUI_DISABLE)
 GUICtrlSetCursor(-1, 0)
 GUICtrlSetOnEvent(-1, "cmbEditionChange")
+Global $btnInfo = GUICtrlCreateButton("Info", 293, 53, 65, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
+GUICtrlSetState(-1, $GUI_DISABLE)
+GUICtrlSetOnEvent(-1, "btnInfoClick")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-Global $Group5 = GUICtrlCreateGroup("", 4, 92, 356, 56)
+Global $Group5 = GUICtrlCreateGroup("", 4, 92, 366, 56)
 Global $btnInstallMBR = GUICtrlCreateButton("Install MBR", 16, 108, 77, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
 GUICtrlSetOnEvent(-1, "btnInstallMBRClick")
-Global $btnPartitionManagement = GUICtrlCreateButton("Partition Management", 120, 108, 122, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
+Global $btnPartitionManagement = GUICtrlCreateButton("Partition Management", 120, 108, 132, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
 GUICtrlSetOnEvent(-1, "btnPartitionManagementClick")
-Global $btnInstallPBR = GUICtrlCreateButton("Install PBR", 270, 108, 77, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
+Global $btnInstallPBR = GUICtrlCreateButton("Install PBR", 280, 108, 77, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
 GUICtrlSetOnEvent(-1, "btnInstallPBRClick")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
-Global $Group4 = GUICtrlCreateGroup("", 4, 150, 356, 53)
-Global $btnInstall = GUICtrlCreateButton("Install", 146, 166, 77, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
+Global $Group4 = GUICtrlCreateGroup("", 4, 150, 366, 53)
+Global $btnInstall = GUICtrlCreateButton("Install", 151, 166, 77, 26, BitOR($BS_CENTER, $BS_VCENTER, $BS_NOTIFY))
 GUICtrlSetOnEvent(-1, "btnInstallClick")
 GUICtrlCreateGroup("", -99, -99, 1, 1)
 GUISetState(@SW_SHOW)
-#EndRegion ### END Koda GUI section ###
+#endregion ### END Koda GUI section ###
+
+#region ### START Koda GUI section ### Form=C:\Users\Admin\Desktop\frmInfo.kxf
+Local $frmInfo = GUICreate("Info", 620, 511, -1, -1, BitOR($WS_SIZEBOX, $WS_THICKFRAME, $WS_SYSMENU), $WS_EX_TOOLWINDOW)
+GUISetOnEvent($GUI_EVENT_CLOSE, "frmInfoClose")
+Local $txtInfo = GUICtrlCreateEdit("", 0, 0, 617, 491, BitOR($ES_LOWERCASE, $ES_AUTOVSCROLL, $ES_AUTOHSCROLL, $ES_READONLY, $WS_HSCROLL, $WS_VSCROLL), $WS_EX_STATICEDGE)
+GUICtrlSetData(-1, "")
+GUISetState(@SW_HIDE, $frmInfo)
+#endregion ### END Koda GUI section ###
 
 Global $frmOutput = GUICreate("Installing Windows...", 485, 60, -1, -1, BitOR($WS_SIZEBOX, $WS_THICKFRAME, $WS_SYSMENU), BitOR($WS_EX_TOOLWINDOW, $WS_EX_TOPMOST))
 GUISetOnEvent($GUI_EVENT_CLOSE, "frmOutputClose", $frmOutput)
@@ -242,44 +254,45 @@ Func _DoCleanUp()
 EndFunc   ;==>_DoCleanUp
 
 Func cmbEditionChange()
-	If $fIs64Bit Then
-		Switch GUICtrlRead(@GUI_CtrlId)
-			Case "Select Edition"
-				$iEdition = 0
-			Case "Home Basic"
-				$iEdition = 1
-			Case "Home Premium"
-				$iEdition = 2
-			Case "Professional"
-				$iEdition = 3
-			Case "Ultimate"
-				$iEdition = 4
-		EndSwitch
-	Else
-		Switch GUICtrlRead(@GUI_CtrlId)
-			Case "Select Edition"
-				$iEdition = 0
-			Case "Starter"
-				$iEdition = 1
-			Case "Home Basic"
-				$iEdition = 2
-			Case "Home Premium"
-				$iEdition = 3
-			Case "Professional"
-				$iEdition = 4
-			Case "Ultimate"
-				$iEdition = 5
-		EndSwitch
-	EndIf
+	Switch GUICtrlRead(@GUI_CtrlId)
+		Case " "
+			$iEdition = 0
+		Case Else
+			$iEdition = GUICtrlRead(@GUI_CtrlId)
+	EndSwitch
 EndFunc   ;==>cmbEditionChange
 
+Func btnInfoClick()
+	Local $sInfo = ""
+	Local $sTemp = GUICtrlRead($txtPathToSource)
+	Local $iTemp = Run(@ComSpec & " /k imagex.exe /info" & ' "' & $sTemp & '" ' & GUICtrlRead($cmbEdition), @TempDir, @SW_HIDE, $STDOUT_CHILD)
+
+	While 1
+		$sInfo &= StdoutRead($iTemp)
+		If @error Then ExitLoop
+		Sleep(100)
+	WEnd
+
+	ProcessClose($iTemp)
+
+	GUICtrlSetData($txtInfo, $sInfo)
+	GUICtrlSetState($txtInfo, $GUI_FOCUS)
+	GUISetState(@SW_SHOW, $frmInfo)
+EndFunc   ;==>btnInfoClick
+
+Func frmInfoClose()
+	GUICtrlSetData($txtInfo, "")
+	GUISetState(@SW_HIDE, $frmInfo)
+EndFunc   ;==>frmInfoClose
+
 Func btnBrowseClick()
-	Local $sTemp = FileOpenDialog("Open", "", "Windows Imaging Format (install.wim)", 1 + 2, "install.wim", $frmMain)
+	Local $sTemp = FileOpenDialog("Open", "", "Windows Imaging Format (*.wim)", 1 + 2, "*.wim", $frmMain)
 
 	If @error Then
 		GUICtrlSetData($txtPathToSource, "")
 		GUICtrlSetTip($txtPathToSource, "Path to installation WIM file")
 		GUICtrlSetState($cmbEdition, $GUI_DISABLE)
+		GUICtrlSetState($btnInfo, $GUI_DISABLE)
 	Else
 		Local $sInfo = ""
 		Local $iTemp = Run(@ComSpec & " /k imagex.exe /info" & ' "' & $sTemp & '"', @TempDir, @SW_HIDE, $STDOUT_CHILD)
@@ -294,22 +307,25 @@ Func btnBrowseClick()
 
 		Local $aTemp = StringRegExp($sInfo, '(?si)<image(.*?)</image>', 3)
 
-		If @error Or UBound($aTemp) < 4 Or UBound($aTemp) > 5 Then
+		If @error Or UBound($aTemp) < 1 Then
 			MsgBox(48, "Windows 7 fast installer", "This is NOT a valid installation file", 0, $frmMain)
 			GUICtrlSetData($txtPathToSource, "")
 			GUICtrlSetTip($txtPathToSource, "Path to installation WIM file")
 			GUICtrlSetState($cmbEdition, $GUI_DISABLE)
+			GUICtrlSetState($btnInfo, $GUI_DISABLE)
 		Else
 			GUICtrlSetData($txtPathToSource, $sTemp)
 			GUICtrlSetTip($txtPathToSource, $sTemp)
 			GUICtrlSetState($cmbEdition, $GUI_ENABLE)
-			If UBound($aTemp) = 4 Then
-				GUICtrlSetData($cmbEdition, "|Select Edition|Home Basic|Home Premium|Professional|Ultimate", "Select Edition")
-				$fIs64Bit = True
-			ElseIf UBound($aTemp) = 5 Then
-				GUICtrlSetData($cmbEdition, "|Select Edition|Starter|Home Basic|Home Premium|Professional|Ultimate", "Select Edition")
-				$fIs64Bit = False
-			EndIf
+			GUICtrlSetState($btnInfo, $GUI_ENABLE)
+
+			$sTemp = "| "
+
+			For $iTemp = 1 To UBound($aTemp)
+				$sTemp &= "|" & $iTemp
+			Next
+
+			GUICtrlSetData($cmbEdition, $sTemp, " ")
 		EndIf
 	EndIf
 EndFunc   ;==>btnBrowseClick
